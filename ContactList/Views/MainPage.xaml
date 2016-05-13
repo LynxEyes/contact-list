@@ -20,19 +20,19 @@
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/WpfTutorialSamples;component/Images/bullet_green.png" Margin="0,0,5,0" />
-                    <TextBlock>Green</TextBlock>
+                    <TextBlock>Ze</TextBlock>
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/WpfTutorialSamples;component/Images/bullet_blue.png" Margin="0,0,5,0" />
-                    <TextBlock>Blue</TextBlock>
+                    <TextBlock>Carlos</TextBlock>
                 </StackPanel>
             </ListViewItem>
             <ListViewItem IsSelected="True">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/WpfTutorialSamples;component/Images/bullet_red.png" Margin="0,0,5,0" />
-                    <TextBlock>Red</TextBlock>
+                    <TextBlock>Alberto</TextBlock>
                 </StackPanel>
             </ListViewItem>
         </ListView>
