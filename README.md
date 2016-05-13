@@ -1,0 +1,1 @@
+Universal Windows Platform Template App with Unit and UI Tests template projects
