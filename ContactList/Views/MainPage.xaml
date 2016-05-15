@@ -8,11 +8,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:ContactList.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:ContactList.ViewModels" mc:Ignorable="d" Height="405" Width="1011"
-      xmlns:sampleData="using:ContactList.SampleData">
+      xmlns:vm="using:ContactList.ViewModels" mc:Ignorable="d" Height="405" Width="1011">
 
     <Page.DataContext>
-        <sampleData:SampleContactData/>
+        <vm:MainPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <Grid>
@@ -30,4 +29,4 @@
     </Grid>
 
 </Page>
-
+    

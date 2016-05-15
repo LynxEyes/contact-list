@@ -6,13 +6,22 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using ContactList.Models;
+using System.Collections.ObjectModel;
 
 namespace ContactList.ViewModels {
+
     public class MainPageViewModel : ViewModelBase {
+
+        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
+
         public MainPageViewModel() {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) {
                 Value = "Designtime value";
             }
+
+            Contacts.Add(new Contact("Ze", null, null));
+            Contacts.Add(new Contact("Carlos", null, null));
+            Contacts.Add(new Contact("Alberto", null, null));
         }
 
         string _Value = "Gas";
@@ -37,24 +46,11 @@ namespace ContactList.ViewModels {
             await Task.CompletedTask;
         }
 
-        public void GotoDetailsPage() =>
-            NavigationService.Navigate(typeof(Views.DetailPage), Value);
+        public void GotoDetailsPage() => NavigationService.Navigate(typeof(Views.DetailPage), Value);
+        public void GotoSettings()    => NavigationService.Navigate(typeof(Views.SettingsPage), 0);
+        public void GotoPrivacy()     => NavigationService.Navigate(typeof(Views.SettingsPage), 1);
+        public void GotoAbout()       => NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
-        public void GotoSettings() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 0);
-
-        public void GotoPrivacy() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 1);
-
-        public void GotoAbout() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 2);
-
-        public List<Contact> Contacts() {
-            List<Contact> list = new List<Contact>();
-            list.Add(new Contact("1", "2", "2"));
-
-            return list;
-        }
     }
 }
 
