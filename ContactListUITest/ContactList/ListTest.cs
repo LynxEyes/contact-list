@@ -41,7 +41,7 @@ namespace ContactListUITest.ContactList {
 
             Assert.Equal(3, items.Count);
 
-            Assert.Equal("Ze", items[0].FindElementByClassName("TextBlock").Text);
+            Assert.Equal("Rafael", items[0].FindElementByClassName("TextBlock").Text);
             Assert.Equal("Carlos", items[1].FindElementByClassName("TextBlock").Text);
             Assert.Equal("Alberto", items[2].FindElementByClassName("TextBlock").Text);
         }

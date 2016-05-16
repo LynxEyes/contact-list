@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,17 +10,18 @@ using System.Collections.ObjectModel;
 namespace ContactList.ViewModels {
 
     public class MainPageViewModel : ViewModelBase {
+        private IContactRepository Repository;
 
-        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
+        public IList<Contact> Contacts => Repository.GetContacts(); //new ObservableCollection<Contact>();
 
-        public MainPageViewModel() {
+        public MainPageViewModel(IContactRepository repository) {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) {
                 Value = "Designtime value";
             }
 
-            Contacts.Add(new Contact("Ze", null, null));
-            Contacts.Add(new Contact("Carlos", null, null));
-            Contacts.Add(new Contact("Alberto", null, null));
+            Repository = repository;
+
+            //Repository.GetContacts().ToList().ForEach(Contacts.Add);
         }
 
         string _Value = "Gas";

@@ -8,11 +8,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:ContactList.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:ContactList.ViewModels" mc:Ignorable="d" Height="405" Width="1011">
-
-    <Page.DataContext>
-        <vm:MainPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+      xmlns:vm="using:ContactList.ViewModels" mc:Ignorable="d" Height="405" Width="1011"
+      DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Grid>
         <TextBlock x:Name="title">Lista de Contactos</TextBlock>

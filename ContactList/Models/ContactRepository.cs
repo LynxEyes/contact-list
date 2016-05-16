@@ -9,13 +9,16 @@ namespace ContactList.Models {
         //private SQLiteConnection DB { get; } = Database.DB; 
 
         public ContactRepository() {
+            DB.DropTable<Contact>();
             DB.CreateTable<Contact>();
+
+            DB.InsertOrReplace(new Contact("Rafael"));
+            DB.InsertOrReplace(new Contact("Carlos"));
+            DB.InsertOrReplace(new Contact("Alberto"));
         }
 
         public IList<Contact> GetContacts() {
-            var contacts = (from contact in DB.Table<Contact>() select contact).ToList();
-
-            return contacts;
+            return (from contact in DB.Table<Contact>() select contact).ToList();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ContactList.Models {
     public class Contact {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set;  }
