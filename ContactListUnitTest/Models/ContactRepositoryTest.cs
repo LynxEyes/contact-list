@@ -18,9 +18,9 @@ namespace ContactListUnitTest.Models {
 
         [Fact]
         public void GetContactsReturnsAllExistingContacts() {
-            DB.Insert(new Contact("John"));
-            DB.Insert(new Contact("Jack"));
-            DB.Insert(new Contact("Joseph"));
+            //DB.Insert(new Contact("John"));
+            //DB.Insert(new Contact("Jack"));
+            //DB.Insert(new Contact("Joseph"));
 
             var contacts = Repository.GetContacts();
             Assert.Equal(3, contacts.Count);

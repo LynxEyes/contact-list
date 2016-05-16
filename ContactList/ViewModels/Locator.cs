@@ -1,8 +1,12 @@
 ﻿using ContactList.Models;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Windows.UI.Xaml.Data;
 
 namespace ContactList.ViewModels {
+
+    //see https://github.com/Windows-XAML/Template10/issues/464#issuecomment-210038007
+    [Bindable]
     public class Locator {
         static Locator() {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
