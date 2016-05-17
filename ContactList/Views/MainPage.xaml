@@ -23,6 +23,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="createContactBtn" Content="Create Contact" Command="{Binding Path=GotoCreateContact}" />
     </Grid>
 
 </Page>

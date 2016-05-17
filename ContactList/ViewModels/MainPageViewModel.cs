@@ -6,6 +6,7 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using ContactList.Models;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Command;
 
 namespace ContactList.ViewModels {
 
@@ -51,6 +52,7 @@ namespace ContactList.ViewModels {
         public void GotoPrivacy()     => NavigationService.Navigate(typeof(Views.SettingsPage), 1);
         public void GotoAbout()       => NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
+        public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
     }
 }
 
