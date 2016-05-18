@@ -37,6 +37,21 @@ namespace ContactListUnitTest.ViewModels {
             Assert.Equal("SaveContact", invokation.Name);
         }
 
+        [Fact]
+        public void SavesNewContactReturnsTrue() {
+            //given that SaveContact returns true
+            var expected = true;
+            mockRepository
+                .AddHandlers()
+                    .SaveContact(Contact => expected);
+
+            // when I save
+            var actual = subject.Save();
+
+            // the repository (and hence the ViewModel) return true
+            Assert.Equal(expected, actual);
+        }
+
         //[Fact]
         //public void SavesNewContact() {
         //    //mockRepository.Handle<bool>("SaveContact", () => { throw new Exception(); });
