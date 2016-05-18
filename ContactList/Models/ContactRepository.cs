@@ -20,5 +20,9 @@ namespace ContactList.Models {
         public IList<Contact> GetContacts() {
             return (from contact in DB.Table<Contact>() select contact).ToList();
         }
+
+        public bool SaveContact(Contact contact) {
+            throw new NotImplementedException();
+        }
     }
 }

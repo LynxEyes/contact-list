@@ -7,8 +7,8 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:ContactList.Views"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:ContactList.ViewModels" mc:Ignorable="d" Height="405" Width="1011"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      mc:Ignorable="d" Height="405" Width="1011"
       DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Grid>

@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace ContactList.Models {
     public interface IContactRepository {
         IList<Contact> GetContacts();
+        bool SaveContact(Contact contact);
     }
 }

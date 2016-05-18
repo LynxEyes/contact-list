@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "PCLMock": "4.0.0",
+    "PCLMock.CodeGeneration.T4": "4.0.0",
     "xunit": "2.1.0",
     "xunit.runner.visualstudio": "2.1.0"
   },

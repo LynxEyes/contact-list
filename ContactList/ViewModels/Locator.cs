@@ -13,8 +13,10 @@ namespace ContactList.ViewModels {
 
             SimpleIoc.Default.Register<IContactRepository, ContactRepository>();
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<CreateContactViewModel>();
         }
 
         public MainPageViewModel Main => ServiceLocator.Current.GetInstance<MainPageViewModel>();
+        public CreateContactViewModel CreateContact => ServiceLocator.Current.GetInstance<CreateContactViewModel>();
     }
 }
