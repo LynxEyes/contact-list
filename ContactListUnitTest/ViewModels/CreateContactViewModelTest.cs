@@ -9,13 +9,9 @@ namespace ContactListUnitTest.ViewModels {
 
         private CreateContactViewModel subject;
         private ContactRepositoryMock mockRepository;
-        private ContactRepositoryStub stubRepository;
-        private ContactRepositorySpy spyRepository;
 
         public CreateContactViewModelTest() {
             mockRepository = new ContactRepositoryMock();
-            stubRepository = new ContactRepositoryStub();
-            spyRepository = new ContactRepositorySpy();
             subject = new CreateContactViewModel(mockRepository);
         }
 
@@ -25,7 +21,7 @@ namespace ContactListUnitTest.ViewModels {
 
         [Fact]
         public void SavesNewContact() {
-            // given that I have set "Peter" on the Name property
+            // given that I have set "whatever" on the Name property
             subject.Name = "whatever";
 
             // when I save
