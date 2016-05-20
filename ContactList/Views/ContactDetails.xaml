@@ -10,7 +10,12 @@
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="showContactTitle" HorizontalAlignment="Left" Margin="144,10,0,0" TextWrapping="Wrap" Text="Contact Details" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Name" HorizontalAlignment="Left" Margin="20,40,0,0" TextWrapping="Wrap" Text="{Binding Contact.Name}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="showContactTitle" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Contact Details" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NameLabel" HorizontalAlignment="Left" Margin="20,40,0,0" TextWrapping="Wrap" Text="Name: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="Name" HorizontalAlignment="Left" Margin="90,40,0,0" TextWrapping="Wrap" Text="{Binding Contact.Name}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="EmailLabel" HorizontalAlignment="Left" Margin="20,70,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Email" HorizontalAlignment="Left" Margin="90,70,0,0" TextWrapping="Wrap" Text="{Binding Contact.Email}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="MobileLabel" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Mobile:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Mobile" HorizontalAlignment="Left" Margin="90,100,0,0" TextWrapping="Wrap" Text="{Binding Contact.Mobile}" VerticalAlignment="Top"/>
     </Grid>
 </Page>

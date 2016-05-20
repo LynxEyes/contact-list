@@ -7,22 +7,26 @@ using static ContactList.Services.Database;
 namespace ContactList.Models {
     public class ContactRepository : IContactRepository {
 
-        //private SQLiteConnection DB { get; } = Database.DB; 
         public ObservableCollection<Contact> Contacts { get; private set; }
 
         public ContactRepository() {
             DB.DropTable<Contact>();
             DB.CreateTable<Contact>();
 
-            //DB.InsertOrReplace(new Contact("Rafael"));
-            //DB.InsertOrReplace(new Contact("Carlos"));
-            //DB.InsertOrReplace(new Contact("Alberto"));
-
             Contacts = new ObservableCollection<Contact>(GetContacts());
         }
 
         public IList<Contact> GetContacts() {
-            return (from contact in DB.Table<Contact>() orderby contact.Name select contact).ToList();
+            return (from contact in DB.Table<Contact>()
+                    select contact)
+                    .OrderBy(c => c.Name, new CaseInsensitiveComparer())
+                    .ToList();
+        }
+
+        private class CaseInsensitiveComparer : IComparer<string> {
+            public int Compare(string x, string y) {
+                return string.Compare(x, y, StringComparison.OrdinalIgnoreCase);
+            }
         }
 
         public bool SaveContact(Contact contact) {
@@ -33,8 +37,9 @@ namespace ContactList.Models {
                 return false;
             }
 
-            Contacts.Add(contact);
             // TODO: is there a better way?
+            Contacts.Clear();
+            GetContacts().ToList().ForEach(Contacts.Add);
             return true;
         }
     }
