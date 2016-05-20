@@ -3,6 +3,7 @@ namespace ContactList.Models
 	using ContactListUnitTest;
 	using System;
 	using System.Collections.Generic;
+	using System.Collections.ObjectModel;
 
 	public class ContactRepositoryStub : Stub<IContactRepository>, IContactRepository
 	{
@@ -17,6 +18,10 @@ namespace ContactList.Models
 			this.handlers = new Handlers(this);
 		}
 
+		public ObservableCollection<Contact> Contacts
+		{
+			get { ObservableCollection<Contact> result; this.InvokeGetProperty("Contacts", out result); return result; }
+		}
 		public IList<Contact> GetContacts()
 		{
 			IList<Contact> result;
@@ -64,6 +69,11 @@ namespace ContactList.Models
 			{
 				return new CountCallerMethods(this.parent, times);
 			}
+			public CountCallers ContactsGetter()
+			{
+				this.parent.CalledGet("Contacts");
+				return this;
+			}
 			public CountCallers GetContacts()
 			{
 				this.parent.Called("GetContacts");
@@ -87,6 +97,11 @@ namespace ContactList.Models
 				{
 					this.parent = parent;
 					this.count = count;
+				}
+				public CountCallerMethods ContactsGetter()
+				{
+					this.parent.CalledGet(this.count, "Contacts");
+					return this;
 				}
 				public CountCallerMethods GetContacts()
 				{
@@ -137,6 +152,10 @@ namespace ContactList.Models
 					this.parent = parent;
 					this.position = position;
 				}
+				public MemberInvocation ContactsGetter()
+				{
+					return this.parent.GetCall(this.position, "Contacts");
+				}
 				public MemberInvocation GetContacts()
 				{
 					return this.parent.GetCall(this.position, "GetContacts");
@@ -153,6 +172,11 @@ namespace ContactList.Models
 			internal Handlers(ContactRepositoryStub parent)
 			{
 				this.parent = parent;
+			}
+			public Handlers Contacts(Func<ObservableCollection<Contact>> action)
+			{
+				this.parent.HandleGet("Contacts", action);
+				return this;
 			}
 			public Handlers GetContacts(Func<IList<Contact>> action)
 			{

@@ -7,13 +7,14 @@ using Windows.UI.Xaml.Navigation;
 using ContactList.Models;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
+using Windows.Storage;
 
 namespace ContactList.ViewModels {
 
     public class MainPageViewModel : ViewModelBase {
         private IContactRepository Repository;
 
-        public IList<Contact> Contacts => Repository.GetContacts(); //new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> Contacts => Repository.Contacts; //new ObservableCollection<Contact>();
 
         public MainPageViewModel(IContactRepository repository) {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) {

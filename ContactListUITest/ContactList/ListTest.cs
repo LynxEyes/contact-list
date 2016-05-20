@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Appium.iOS;
 using Xunit;
 using System;
+using System.Linq;
 
 namespace ContactListUITest.ContactList {
 
@@ -31,19 +32,32 @@ namespace ContactListUITest.ContactList {
         [Fact]
         public void ListExistsAndContainsElements() {
             // Given there are 3 contacts named Ze, Carlos, Alberto
-            // when I view the list of contacts
-            // Then I can see Ze, Carlos and Alberto
+            CreateContact("Rafael");
+            CreateContact("Carlos");
+            CreateContact("Alberto");
 
+            // when I view the list of contacts
             var list = ListSession.FindElementByAccessibilityId("contactList");
             Assert.NotNull(list);
 
+            // Then I can see it has 3 names: Rafael, Carlos and Alberto
             var items = list.FindElementsByClassName("ListViewItem");
-
             Assert.Equal(3, items.Count);
 
-            Assert.Equal("Rafael", items[0].FindElementByClassName("TextBlock").Text);
-            Assert.Equal("Carlos", items[1].FindElementByClassName("TextBlock").Text);
-            Assert.Equal("Alberto", items[2].FindElementByClassName("TextBlock").Text);
+            var names = list.FindElementsByClassName("TextBlock").Select(x => x.Text).ToList();
+            Assert.Contains("Rafael", names);
+            Assert.Contains("Carlos", names);
+            Assert.Contains("Alberto", names);
+        }
+
+        private void CreateContact(string Name) {
+            ListSession.FindElementByAccessibilityId("createContactBtn").Click();
+            var nameInput = ListSession.FindElementByAccessibilityId("nameInput");
+            nameInput.Clear();
+            nameInput.SendKeys(Name);
+            // Just to focus on another element, without this the text wouldn't be TwoWay sync'd
+            ListSession.FindElementByAccessibilityId("emailInput").Click();
+            ListSession.FindElementByAccessibilityId("saveBtn").Click();
         }
     }
 }
