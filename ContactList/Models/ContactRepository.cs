@@ -7,13 +7,9 @@ using static ContactList.Services.Database;
 namespace ContactList.Models {
     public class ContactRepository : IContactRepository {
 
-        public ObservableCollection<Contact> Contacts { get; private set; }
-
         public ContactRepository() {
             DB.DropTable<Contact>();
             DB.CreateTable<Contact>();
-
-            Contacts = new ObservableCollection<Contact>(GetContacts());
         }
 
         public IList<Contact> GetContacts() {
@@ -30,16 +26,12 @@ namespace ContactList.Models {
         }
 
         public bool SaveContact(Contact contact) {
-
             try {
                 DB.Insert(contact);
             } catch (SQLite.NotNullConstraintViolationException) {
                 return false;
             }
 
-            // TODO: is there a better way?
-            Contacts.Clear();
-            GetContacts().ToList().ForEach(Contacts.Add);
             return true;
         }
     }

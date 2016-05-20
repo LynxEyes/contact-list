@@ -17,8 +17,8 @@ namespace ContactList.Views {
         private void GoToDetail_Click(object sender, RoutedEventArgs e) {
         }
 
-        private void contactList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var contactSelected = e.AddedItems[0] as Contact;
+        private void contactList_ItemClick(object sender, ItemClickEventArgs e) {
+            var contactSelected = e.ClickedItem as Contact;
 
             var vm = this.DataContext as MainPageViewModel;
             vm.GotoContactDetails(contactSelected);

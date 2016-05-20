@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace ContactList.Models {
     public interface IContactRepository {
-        ObservableCollection<Contact> Contacts { get; }
-
         IList<Contact> GetContacts();
         bool SaveContact(Contact contact);
     }

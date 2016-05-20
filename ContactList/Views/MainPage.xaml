@@ -13,7 +13,7 @@
 
     <Grid>
         <TextBlock x:Name="title">Lista de Contactos</TextBlock>
-        <ListView x:Name="contactList" Margin="10" ItemsSource="{Binding Contacts}" SelectionChanged="contactList_SelectionChanged">
+        <ListView x:Name="contactList" Margin="10" ItemsSource="{Binding Contacts}" IsItemClickEnabled="True" ItemClick="contactList_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

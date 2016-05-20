@@ -8,13 +8,15 @@ using ContactList.Models;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
 using Windows.Storage;
+using System.ComponentModel;
 
 namespace ContactList.ViewModels {
 
-    public class MainPageViewModel : ViewModelBase {
+    public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged {
         private IContactRepository Repository;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Contact> Contacts => Repository.Contacts; //new ObservableCollection<Contact>();
+        public IList<Contact> Contacts => Repository.GetContacts();
 
         public MainPageViewModel(IContactRepository repository) {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) {
@@ -22,8 +24,6 @@ namespace ContactList.ViewModels {
             }
 
             Repository = repository;
-
-            //Repository.GetContacts().ToList().ForEach(Contacts.Add);
         }
 
         string _Value = "Gas";
@@ -33,6 +33,10 @@ namespace ContactList.ViewModels {
             if (suspensionState.Any()) {
                 Value = suspensionState[nameof(Value)]?.ToString();
             }
+
+            if (mode == NavigationMode.Back || mode == NavigationMode.Refresh)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"));
+
             await Task.CompletedTask;
         }
 
@@ -54,8 +58,6 @@ namespace ContactList.ViewModels {
         public void GotoAbout()       => NavigationService.Navigate(typeof(Views.SettingsPage), 2);
         public void GotoContactDetails(Contact contact) => 
             NavigationService.Navigate(typeof(Views.ContactDetails), contact);
-
-
 
         public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
     }
