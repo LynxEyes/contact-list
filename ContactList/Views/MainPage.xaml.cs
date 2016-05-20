@@ -21,8 +21,7 @@ namespace ContactList.Views {
             var contactSelected = e.AddedItems[0] as Contact;
 
             var vm = this.DataContext as MainPageViewModel;
-
-            vm.GotoCreateContact.Execute(null);
+            vm.GotoContactDetails(contactSelected);
         }
     }
 }

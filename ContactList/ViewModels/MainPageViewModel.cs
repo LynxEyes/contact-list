@@ -52,6 +52,10 @@ namespace ContactList.ViewModels {
         public void GotoSettings()    => NavigationService.Navigate(typeof(Views.SettingsPage), 0);
         public void GotoPrivacy()     => NavigationService.Navigate(typeof(Views.SettingsPage), 1);
         public void GotoAbout()       => NavigationService.Navigate(typeof(Views.SettingsPage), 2);
+        public void GotoContactDetails(Contact contact) => 
+            NavigationService.Navigate(typeof(Views.ContactDetails), contact);
+
+
 
         public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
     }

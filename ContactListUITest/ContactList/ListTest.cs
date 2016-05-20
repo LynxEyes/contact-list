@@ -50,6 +50,23 @@ namespace ContactListUITest.ContactList {
             Assert.Contains("Alberto", names);
         }
 
+
+        [Fact]
+        public void ListSelectionChangeNavigatesToDetailPage() {
+            //given there is a contact in the list
+            CreateContact("Rafael");
+
+            var list = ListSession.FindElementByAccessibilityId("contactList");
+
+            //when I click the contact on the list
+            var item = list.FindElementByClassName("ListViewItem");
+            item.Click();
+
+            //then there is a  navigation to the detail page
+            var showContactTitle = ListSession.FindElementByAccessibilityId("showContactTitle");
+            Assert.NotNull(showContactTitle);
+        }
+
         private void CreateContact(string Name) {
             ListSession.FindElementByAccessibilityId("createContactBtn").Click();
             var nameInput = ListSession.FindElementByAccessibilityId("nameInput");
