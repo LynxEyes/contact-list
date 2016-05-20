@@ -3,7 +3,6 @@ namespace ContactList.Models
 	using ContactListUnitTest;
 	using System;
 	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
 
 	public class ContactRepositoryStub : Stub<IContactRepository>, IContactRepository
 	{
@@ -18,9 +17,11 @@ namespace ContactList.Models
 			this.handlers = new Handlers(this);
 		}
 
-		public ObservableCollection<Contact> Contacts
+		public bool DeleteContact(Contact contact)
 		{
-			get { ObservableCollection<Contact> result; this.InvokeGetProperty("Contacts", out result); return result; }
+			bool result;
+			this.InvokeMember("DeleteContact", new object[] { contact }, out result);
+			return result;
 		}
 		public IList<Contact> GetContacts()
 		{
@@ -69,9 +70,14 @@ namespace ContactList.Models
 			{
 				return new CountCallerMethods(this.parent, times);
 			}
-			public CountCallers ContactsGetter()
+			public CountCallers DeleteContact(Contact contact)
 			{
-				this.parent.CalledGet("Contacts");
+				this.parent.CalledWith("DeleteContact", contact);
+				return this;
+			}
+			public CountCallers DeleteContact()
+			{
+				this.parent.Called("DeleteContact");
 				return this;
 			}
 			public CountCallers GetContacts()
@@ -98,9 +104,14 @@ namespace ContactList.Models
 					this.parent = parent;
 					this.count = count;
 				}
-				public CountCallerMethods ContactsGetter()
+				public CountCallerMethods DeleteContact(Contact contact)
 				{
-					this.parent.CalledGet(this.count, "Contacts");
+					this.parent.CalledWith(this.count, "DeleteContact", contact);
+					return this;
+				}
+				public CountCallerMethods DeleteContact()
+				{
+					this.parent.Called(this.count, "DeleteContact");
 					return this;
 				}
 				public CountCallerMethods GetContacts()
@@ -152,9 +163,9 @@ namespace ContactList.Models
 					this.parent = parent;
 					this.position = position;
 				}
-				public MemberInvocation ContactsGetter()
+				public MemberInvocation DeleteContact()
 				{
-					return this.parent.GetCall(this.position, "Contacts");
+					return this.parent.GetCall(this.position, "DeleteContact");
 				}
 				public MemberInvocation GetContacts()
 				{
@@ -173,9 +184,9 @@ namespace ContactList.Models
 			{
 				this.parent = parent;
 			}
-			public Handlers Contacts(Func<ObservableCollection<Contact>> action)
+			public Handlers DeleteContact(Func<Contact, bool> action)
 			{
-				this.parent.HandleGet("Contacts", action);
+				this.parent.Handle<Contact, bool>("DeleteContact", action);
 				return this;
 			}
 			public Handlers GetContacts(Func<IList<Contact>> action)

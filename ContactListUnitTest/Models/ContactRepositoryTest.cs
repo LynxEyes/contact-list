@@ -1,5 +1,7 @@
 ﻿using ContactList.Models;
 using System;
+using System.Diagnostics;
+using System.Linq;
 using Xunit;
 using static ContactList.Services.Database;
 
@@ -35,7 +37,7 @@ namespace ContactListUnitTest.Models {
             subject.SaveContact(contact);
 
             // then it is stored on the database
-            var stored = DB.Table<Contact>().Where(x => x.Name == "Joao das Neves").First(); 
+            var stored = DB.Table<Contact>().Where(x => x.Name == "Joao das Neves").First();
 
             Assert.NotNull(stored);
         }
@@ -50,5 +52,31 @@ namespace ContactListUnitTest.Models {
             Assert.False(result);
         }
 
+        [Fact]
+        public void DeletesExistingContact() {
+            //given an existing contact
+            var contact = new Contact("Joao das Neves");
+            subject.SaveContact(contact);
+
+            //when I delete it
+            var deleted = subject.DeleteContact(contact);
+
+            //then is no longer there
+            Assert.True(deleted);
+
+            var stored = DB.Table<Contact>().Where(x => x.Name == "Joao das Neves").ToList();
+            Assert.Empty(stored);
+        }
+
+        [Fact]
+        public void FailsToDeleteUnexistingContact() {
+            //given an existing contact
+            var contact = new Contact("Joao das Neves");
+            //subject.SaveContact(contact);
+
+            //when I delete it
+            var deleted = subject.DeleteContact(contact);
+            Assert.False(deleted);
+        }
     }
 }

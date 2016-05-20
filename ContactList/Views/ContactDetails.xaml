@@ -17,5 +17,8 @@
         <TextBlock x:Name="Email" HorizontalAlignment="Left" Margin="90,70,0,0" TextWrapping="Wrap" Text="{Binding Contact.Email}" VerticalAlignment="Top"/>
         <TextBlock x:Name="MobileLabel" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Mobile:" VerticalAlignment="Top"/>
         <TextBlock x:Name="Mobile" HorizontalAlignment="Left" Margin="90,100,0,0" TextWrapping="Wrap" Text="{Binding Contact.Mobile}" VerticalAlignment="Top"/>
+
+        <Button x:Name="deleteContactBtn" Content="Delete Contact" Command="{Binding Path=DeleteContactCommand}"></Button>
+        
     </Grid>
 </Page>

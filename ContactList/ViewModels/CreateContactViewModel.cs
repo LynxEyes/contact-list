@@ -14,11 +14,10 @@ namespace ContactList.ViewModels {
     public class CreateContactViewModel : ViewModelBase, INotifyPropertyChanged {
         private IContactRepository Repository { get; set; }
 
-        public ICommand CreateContactCommand { get; private set; }
+        public ICommand CreateContactCommand => new RelayCommand(SaveContact);
 
         public CreateContactViewModel(IContactRepository repository) {
             Repository = repository;
-            CreateContactCommand = new RelayCommand(SaveContact);
         }
 
         public string Name { get; set; }

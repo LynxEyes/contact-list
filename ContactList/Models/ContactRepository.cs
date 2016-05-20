@@ -34,5 +34,9 @@ namespace ContactList.Models {
 
             return true;
         }
+
+        public bool DeleteContact(Contact contact) {
+            return DB.Delete(contact) == 1;
+        }
     }
 }
