@@ -11,9 +11,9 @@ using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
 
 namespace ContactList.ViewModels {
-    public class ContactDetails : ViewModelBase, INotifyPropertyChanged {
+    public class ContactDetailsViewModel : ViewModelBase, INotifyPropertyChanged {
 
-        public ContactDetails(IContactRepository repository) {
+        public ContactDetailsViewModel(IContactRepository repository) {
             Repository = repository;
         }
 
@@ -38,9 +38,7 @@ namespace ContactList.ViewModels {
         }
 
         private void DeleteContact() {
-
             Repository.DeleteContact(contact);
-
             NavigationService.GoBack();
         }
 

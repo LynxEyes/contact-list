@@ -10,5 +10,6 @@ namespace ContactList.Models {
         IList<Contact> GetContacts();
         bool SaveContact(Contact contact);
         bool DeleteContact(Contact contact);
+        bool DeleteAll();
     }
 }

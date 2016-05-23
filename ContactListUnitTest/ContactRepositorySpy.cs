@@ -15,6 +15,12 @@ namespace ContactList.Models
 			this.countCalls = new CountCalls(this);
 		}
 
+		public bool DeleteAll()
+		{
+			bool result;
+			this.InvokeMember("DeleteAll", new object[] {  }, out result);
+			return result;
+		}
 		public bool DeleteContact(Contact contact)
 		{
 			bool result;
@@ -64,6 +70,11 @@ namespace ContactList.Models
 			{
 				return new CountCallerMethods(this.parent, times);
 			}
+			public CountCallers DeleteAll()
+			{
+				this.parent.Called("DeleteAll");
+				return this;
+			}
 			public CountCallers DeleteContact(Contact contact)
 			{
 				this.parent.CalledWith("DeleteContact", contact);
@@ -97,6 +108,11 @@ namespace ContactList.Models
 				{
 					this.parent = parent;
 					this.count = count;
+				}
+				public CountCallerMethods DeleteAll()
+				{
+					this.parent.Called(this.count, "DeleteAll");
+					return this;
 				}
 				public CountCallerMethods DeleteContact(Contact contact)
 				{
@@ -156,6 +172,10 @@ namespace ContactList.Models
 				{
 					this.parent = parent;
 					this.position = position;
+				}
+				public MemberInvocation DeleteAll()
+				{
+					return this.parent.GetCall(this.position, "DeleteAll");
 				}
 				public MemberInvocation DeleteContact()
 				{

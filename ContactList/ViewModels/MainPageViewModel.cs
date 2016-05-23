@@ -5,10 +5,9 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using ContactList.Models;
-using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
-using Windows.Storage;
 using System.ComponentModel;
+using System;
 
 namespace ContactList.ViewModels {
 
@@ -28,6 +27,11 @@ namespace ContactList.ViewModels {
 
         string _Value = "Gas";
         public string Value { get { return _Value; } set { Set(ref _Value, value); } }
+
+        public void DeleteAllContacts() {
+            Repository.DeleteAll();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"));
+        }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {
             if (suspensionState.Any()) {
@@ -60,6 +64,7 @@ namespace ContactList.ViewModels {
             NavigationService.Navigate(typeof(Views.ContactDetails), contact);
 
         public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
+        public RelayCommand DeleteAllContactsCommand => new RelayCommand(DeleteAllContacts);
     }
 }
 

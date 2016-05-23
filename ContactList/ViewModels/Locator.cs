@@ -14,11 +14,11 @@ namespace ContactList.ViewModels {
             SimpleIoc.Default.Register<IContactRepository, ContactRepository>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<CreateContactViewModel>();
-            SimpleIoc.Default.Register<ContactDetails>();
+            SimpleIoc.Default.Register<ContactDetailsViewModel>();
         }
 
         public MainPageViewModel Main => ServiceLocator.Current.GetInstance<MainPageViewModel>();
         public CreateContactViewModel CreateContact => ServiceLocator.Current.GetInstance<CreateContactViewModel>();
-        public ContactDetails ContactDetails => ServiceLocator.Current.GetInstance<ContactDetails>();
+        public ContactDetailsViewModel ContactDetails => ServiceLocator.Current.GetInstance<ContactDetailsViewModel>();
     }
 }

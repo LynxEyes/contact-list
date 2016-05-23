@@ -4,7 +4,7 @@ using System;
 using Xunit;
 
 namespace ContactListUnitTest.ViewModels {
-    public class CreateContactViewModelTest : IDisposable {
+    public class CreateContactViewModelTest {
 
         private CreateContactViewModel subject;
         private ContactRepositoryMock mockRepository;
@@ -12,10 +12,6 @@ namespace ContactListUnitTest.ViewModels {
         public CreateContactViewModelTest() {
             mockRepository = new ContactRepositoryMock();
             subject = new CreateContactViewModel(mockRepository);
-        }
-
-        public void Dispose() {
-            //throw new NotImplementedException();
         }
 
         [Fact]

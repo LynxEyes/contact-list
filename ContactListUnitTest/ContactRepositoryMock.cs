@@ -21,6 +21,12 @@ namespace ContactList.Models
 			this.verifiers = new Verifiers(this);
 		}
 
+		public bool DeleteAll()
+		{
+			bool result;
+			this.InvokeMember("DeleteAll", new object[] {  }, out result);
+			return result;
+		}
 		public bool DeleteContact(Contact contact)
 		{
 			bool result;
@@ -82,6 +88,11 @@ namespace ContactList.Models
 			{
 				return new CountCallerMethods(this.parent, times);
 			}
+			public CountCallers DeleteAll()
+			{
+				this.parent.Called("DeleteAll");
+				return this;
+			}
 			public CountCallers DeleteContact(Contact contact)
 			{
 				this.parent.CalledWith("DeleteContact", contact);
@@ -115,6 +126,11 @@ namespace ContactList.Models
 				{
 					this.parent = parent;
 					this.count = count;
+				}
+				public CountCallerMethods DeleteAll()
+				{
+					this.parent.Called(this.count, "DeleteAll");
+					return this;
 				}
 				public CountCallerMethods DeleteContact(Contact contact)
 				{
@@ -175,6 +191,10 @@ namespace ContactList.Models
 					this.parent = parent;
 					this.position = position;
 				}
+				public MemberInvocation DeleteAll()
+				{
+					return this.parent.GetCall(this.position, "DeleteAll");
+				}
 				public MemberInvocation DeleteContact()
 				{
 					return this.parent.GetCall(this.position, "DeleteContact");
@@ -195,6 +215,11 @@ namespace ContactList.Models
 			internal Handlers(ContactRepositoryMock parent)
 			{
 				this.parent = parent;
+			}
+			public Handlers DeleteAll(Func<bool> action)
+			{
+				this.parent.Handle<bool>("DeleteAll", action);
+				return this;
 			}
 			public Handlers DeleteContact(Func<Contact, bool> action)
 			{
@@ -219,6 +244,11 @@ namespace ContactList.Models
 			{
 				this.parent = parent;
 			}
+			public Verifications DeleteAll()
+			{
+				this.parent.AddVerification("DeleteAll", new object[0]);
+				return this;
+			}
 			public Verifications DeleteContact(Contact contact)
 			{
 				this.parent.AddVerification("DeleteContact", contact);
@@ -241,6 +271,11 @@ namespace ContactList.Models
 			internal Verifiers(ContactRepositoryMock parent)
 			{
 				this.parent = parent;
+			}
+			public Verifiers DeleteAll()
+			{
+				this.parent.Verify("DeleteAll", new object[0]);
+				return this;
 			}
 			public Verifiers DeleteContact(Contact contact)
 			{

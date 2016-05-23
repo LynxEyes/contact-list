@@ -24,6 +24,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Button x:Name="createContactBtn" Content="Create Contact" Command="{Binding Path=GotoCreateContact}" />
+        <Button x:Name="deleteAllContactsBtn" Content="Delete All Contacts" Margin="0,224,0,149" Command="{Binding Path=DeleteAllContactsCommand}" />
     </Grid>
 
 </Page>

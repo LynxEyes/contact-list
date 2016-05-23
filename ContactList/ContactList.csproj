@@ -106,7 +106,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Database.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
-    <Compile Include="ViewModels\ContactDetails.cs" />
+    <Compile Include="ViewModels\ContactDetailsViewModel.cs" />
     <Compile Include="ViewModels\CreateContactViewModel.cs" />
     <Compile Include="ViewModels\Locator.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

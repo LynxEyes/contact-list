@@ -78,5 +78,21 @@ namespace ContactListUnitTest.Models {
             var deleted = subject.DeleteContact(contact);
             Assert.False(deleted);
         }
+
+        [Fact]
+        public void DeletesAllContacts() {
+            //given some existing contact
+            var contact1 = new Contact("Joao das Neves");
+            var contact2 = new Contact("Jonny of the Snows");
+            subject.SaveContact(contact1);
+            subject.SaveContact(contact2);
+
+            // When I delete all contacts
+            subject.DeleteAll();
+
+            // Then we're left with an empty table of contacts
+            var table = DB.Table<Contact>().ToList();
+            Assert.Empty(table);
+        }
     }
 }
