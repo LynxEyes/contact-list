@@ -1,28 +1,10 @@
-﻿using OpenQA.Selenium.Appium.iOS;
-using OpenQA.Selenium.Remote;
-using System;
-using Xunit;
+﻿using Xunit;
 
 namespace ContactListUITest.ContactList {
-    public class DeleteAllContactsTest : IDisposable {
-        protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
-        protected static IOSDriver<IOSElement> DeleteSession; // Temporary placeholder until Windows namespace exists
-
-        public DeleteAllContactsTest() {
-            DesiredCapabilities appCapabilities = new DesiredCapabilities();
-            appCapabilities.SetCapability("app", "cf59c34d-6a44-4b82-9029-ad2fc3cc2611_xnnwpqakf2yqj!App");
-            DeleteSession = new IOSDriver<IOSElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
-            Assert.NotNull(DeleteSession);
-        }
-
-        public void Dispose() {
-            DeleteSession.Dispose();
-            DeleteSession = null;
-        }
-        
+    public class DeleteAllContactsTest : BaseUITest {
         [Fact]
         public void DeleteAllContactsButtonExists() {
-            var deleteAllBtn = DeleteSession.FindElementByAccessibilityId("deleteAllContactsBtn");
+            var deleteAllBtn = AppSession.FindElementByAccessibilityId("deleteAllContactsBtn");
             Assert.NotNull(deleteAllBtn);
         }
 
@@ -34,22 +16,12 @@ namespace ContactListUITest.ContactList {
             CreateContact("Jill");
 
             // When I delete all of them
-            DeleteSession.FindElementByAccessibilityId("deleteAllContactsBtn").Click();
+            AppSession.FindElementByAccessibilityId("deleteAllContactsBtn").Click();
 
             // Then the contact list is empty
-            var list = DeleteSession.FindElementByAccessibilityId("contactList")
+            var list = AppSession.FindElementByAccessibilityId("contactList")
                                     .FindElementsByClassName("ListViewItem");
             Assert.Equal(0, list.Count);
-        }
-
-        private void CreateContact(string Name) {
-            DeleteSession.FindElementByAccessibilityId("createContactBtn").Click();
-            var nameInput = DeleteSession.FindElementByAccessibilityId("nameInput");
-            nameInput.Clear();
-            nameInput.SendKeys(Name);
-            // Just to focus on another element, without this the text wouldn't be TwoWay sync'd
-            DeleteSession.FindElementByAccessibilityId("emailInput").Click();
-            DeleteSession.FindElementByAccessibilityId("saveBtn").Click();
         }
     }
 }

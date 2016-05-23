@@ -4,25 +4,11 @@ using System;
 using Xunit;
 
 namespace ContactListUITest.ContactList {
-    public class CreateContactTest : IDisposable {
-        protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
-        protected static IOSDriver<IOSElement> CreateSession; // Temporary placeholder until Windows namespace exists
-
-        public CreateContactTest() {
-            DesiredCapabilities appCapabilities = new DesiredCapabilities();
-            appCapabilities.SetCapability("app", "cf59c34d-6a44-4b82-9029-ad2fc3cc2611_xnnwpqakf2yqj!App");
-            CreateSession = new IOSDriver<IOSElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
-            Assert.NotNull(CreateSession);
-        }
-
-        public void Dispose() {
-            CreateSession.Dispose();
-            CreateSession = null;
-        }
+    public class CreateContactTest : BaseUITest {
 
         [Fact]
         public void MainPageHasCreateContactButton() {
-            var createContactBtn = CreateSession.FindElementByAccessibilityId("createContactBtn");
+            var createContactBtn = AppSession.FindElementByAccessibilityId("createContactBtn");
             Assert.NotNull(createContactBtn);
         }
 
@@ -30,7 +16,7 @@ namespace ContactListUITest.ContactList {
         public void CreateContactButtonNavigatesToCreateContactPage() {
             NavigateToCreateForm();
             
-            var createContactTitle = CreateSession.FindElementByAccessibilityId("createContactTitle");
+            var createContactTitle = AppSession.FindElementByAccessibilityId("createContactTitle");
             Assert.NotNull(createContactTitle);
         }
 
@@ -38,9 +24,9 @@ namespace ContactListUITest.ContactList {
         public void CreateContactPageHasRightElements() {
             NavigateToCreateForm();
 
-            var nameInput = CreateSession.FindElementByAccessibilityId("nameInput");
-            var mobileInput = CreateSession.FindElementByAccessibilityId("mobileInput");
-            var emailInput = CreateSession.FindElementByAccessibilityId("emailInput");
+            var nameInput = AppSession.FindElementByAccessibilityId("nameInput");
+            var mobileInput = AppSession.FindElementByAccessibilityId("mobileInput");
+            var emailInput = AppSession.FindElementByAccessibilityId("emailInput");
 
             Assert.NotNull(nameInput);
             Assert.NotNull(mobileInput);
@@ -56,19 +42,19 @@ namespace ContactListUITest.ContactList {
             ClickSaveButton();
 
             //check that it returned to main page
-            var TitleLabel = CreateSession.FindElementByAccessibilityId("title");
+            var TitleLabel = AppSession.FindElementByAccessibilityId("title");
             Assert.NotNull(TitleLabel);
         }
 
         [Fact]
         public void SaveContactUpdatesList() {
-            var listSize = CreateSession.FindElementByAccessibilityId("contactList")
+            var listSize = AppSession.FindElementByAccessibilityId("contactList")
                                         .FindElementsByClassName("Image").Count;
             NavigateToCreateForm();
             FillInField("nameInput", "Jack", "emailInput");
             ClickSaveButton();
             
-            var newListSize = CreateSession.FindElementByAccessibilityId("contactList")
+            var newListSize = AppSession.FindElementByAccessibilityId("contactList")
                                            .FindElementsByClassName("Image").Count;
 
             //check that list has one new element
@@ -83,16 +69,16 @@ namespace ContactListUITest.ContactList {
 
             ClickSaveButton();
 
-            var errorMessage = CreateSession.FindElementByAccessibilityId("errorMessage");
+            var errorMessage = AppSession.FindElementByAccessibilityId("errorMessage");
             Assert.NotEmpty(errorMessage.Text);
         }
 
         private void NavigateToCreateForm() {
-            CreateSession.FindElementByAccessibilityId("createContactBtn").Click();
+            AppSession.FindElementByAccessibilityId("createContactBtn").Click();
         }
 
         private void ClickSaveButton() {
-            CreateSession.FindElementByAccessibilityId("saveBtn").Click();
+            AppSession.FindElementByAccessibilityId("saveBtn").Click();
         }
 
         private void FillInContact(string name, string email, string mobile) {
@@ -104,10 +90,10 @@ namespace ContactListUITest.ContactList {
         private void FillInField(string fieldName, string data, string focusField) {
             if (data == null) return;
 
-            var field = CreateSession.FindElementByAccessibilityId(fieldName);
+            var field = AppSession.FindElementByAccessibilityId(fieldName);
             field.Clear();
             field.SendKeys(data);
-            CreateSession.FindElementByAccessibilityId(focusField).Click();
+            AppSession.FindElementByAccessibilityId(focusField).Click();
         }
     }
 }

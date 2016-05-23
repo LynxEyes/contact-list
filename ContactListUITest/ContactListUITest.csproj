@@ -96,6 +96,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ContactList\BaseUITest.cs" />
     <Compile Include="ContactList\ContactDetailsTest.cs" />
     <Compile Include="ContactList\DeleteContactTest.cs" />
     <Compile Include="ContactList\ListTest.cs" />
