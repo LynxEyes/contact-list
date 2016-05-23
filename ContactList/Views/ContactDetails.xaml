@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding ContactDetails, Source={StaticResource Locator}}"
-    >
+    DataContext="{Binding ContactDetails, Source={StaticResource Locator}}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="showContactTitle" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Contact Details" VerticalAlignment="Top"/>
@@ -18,7 +17,7 @@
         <TextBlock x:Name="MobileLabel" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Mobile:" VerticalAlignment="Top"/>
         <TextBlock x:Name="Mobile" HorizontalAlignment="Left" Margin="90,100,0,0" TextWrapping="Wrap" Text="{Binding Contact.Mobile}" VerticalAlignment="Top"/>
 
-        <Button x:Name="deleteContactBtn" Content="Delete Contact" Command="{Binding Path=DeleteContactCommand}"></Button>
-        
+        <Button x:Name="deleteContactBtn" Content="Delete Contact" Command="{Binding DeleteContactCommand}"/>
+        <Button x:Name="updateContactBtn" Content="Update Contact" Command="{Binding UpdateContactCommand}" Margin="0,341,0,267"/>
     </Grid>
 </Page>

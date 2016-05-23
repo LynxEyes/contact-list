@@ -102,6 +102,7 @@
     <Compile Include="ContactList\ListTest.cs" />
     <Compile Include="ContactList\CreateContactTest.cs" />
     <Compile Include="ContactList\DeleteAllContactsTest.cs" />
+    <Compile Include="ContactList\UpdateContactTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

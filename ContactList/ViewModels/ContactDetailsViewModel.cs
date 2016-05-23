@@ -15,6 +15,8 @@ namespace ContactList.ViewModels {
         }
 
         public ICommand DeleteContactCommand => new RelayCommand(DeleteContact);
+        public ICommand UpdateContactCommand => 
+            new RelayCommand(() => NavigationService.Navigate(typeof(Views.UpdateContact), contact));
 
         private Contact contact;
         public Contact Contact {

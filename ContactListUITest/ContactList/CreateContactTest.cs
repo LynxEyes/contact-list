@@ -16,7 +16,7 @@ namespace ContactListUITest.ContactList {
         public void CreateContactButtonNavigatesToCreateContactPage() {
             NavigateToCreateForm();
             
-            var createContactTitle = AppSession.FindElementByAccessibilityId("createContactTitle");
+            var createContactTitle = AppSession.FindElementByAccessibilityId("contactFormTitle");
             Assert.NotNull(createContactTitle);
         }
 

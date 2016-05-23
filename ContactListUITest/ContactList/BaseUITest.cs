@@ -52,7 +52,7 @@ namespace ContactListUITest.ContactList {
         }
 
         protected void ClickSaveButton() {
-            AppSession.FindElementByAccessibilityId("saveBtn").Click();
+            AppSession.FindElementByAccessibilityId("saveContactBtn").Click();
         }
     }
 }

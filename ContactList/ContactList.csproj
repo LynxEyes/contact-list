@@ -106,11 +106,19 @@
     <Compile Include="Services\Database.cs" />
     <Compile Include="Utils\CaseInsensitiveComparer.cs" />
     <Compile Include="ViewModels\ContactDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ContactFormViewModel.cs" />
     <Compile Include="ViewModels\CreateContactViewModel.cs" />
     <Compile Include="ViewModels\Locator.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\UpdateContactViewModel.cs" />
     <Compile Include="Views\ContactDetails.xaml.cs">
       <DependentUpon>ContactDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactForm.xaml.cs">
+      <DependentUpon>ContactForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateContact.xaml.cs">
+      <DependentUpon>UpdateContact.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateContact.xaml.cs">
       <DependentUpon>CreateContact.xaml</DependentUpon>
@@ -150,6 +158,14 @@
     <Page Include="Views\ContactDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContactForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpdateContact.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CreateContact.xaml">
       <SubType>Designer</SubType>

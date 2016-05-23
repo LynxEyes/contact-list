@@ -11,18 +11,12 @@ using System.Windows.Input;
 using System.ComponentModel;
 
 namespace ContactList.ViewModels {
-    public class CreateContactViewModel : ViewModelBase, INotifyPropertyChanged {
+    public class CreateContactViewModel : ContactFormViewModel, INotifyPropertyChanged {
         public CreateContactViewModel(IContactRepository repository) {
             Repository = repository;
         }
 
         private IContactRepository Repository { get; set; }
-
-        public ICommand CreateContactCommand => new RelayCommand(SaveContact);
-
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Mobile { get; set; }
 
         private string errorMessage;
         public string ErrorMessage {
@@ -35,15 +29,19 @@ namespace ContactList.ViewModels {
         public new event PropertyChangedEventHandler PropertyChanged;
 
         public bool Save() {
-            var contact = new Contact(Name, Email, Mobile);
-            return Repository.SaveContact(contact);
+            return Repository.SaveContact(Contact);
         }
 
-        public void SaveContact() {
+        public override void SaveContact() {
             if (Save())
                 NavigationService.GoBack();
             else
                 ErrorMessage = "Error: Please fill in the Name";
+        }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {
+            Contact = new Contact();
+            await Task.CompletedTask;
         }
     }
 }
