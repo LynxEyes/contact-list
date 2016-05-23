@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContactList.Utils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,12 +18,6 @@ namespace ContactList.Models {
                     select contact)
                     .OrderBy(c => c.Name, new CaseInsensitiveComparer())
                     .ToList();
-        }
-
-        private class CaseInsensitiveComparer : IComparer<string> {
-            public int Compare(string x, string y) {
-                return string.Compare(x, y, StringComparison.OrdinalIgnoreCase);
-            }
         }
 
         public bool SaveContact(Contact contact) {
