@@ -19,12 +19,11 @@ namespace ContactListUITest.ContactList {
             AppSession.Dispose();
             AppSession = null;
         }
+
         protected void CreateContact(string name, string email = null, string mobile = null) {
-            AppSession.FindElementByAccessibilityId("createContactBtn").Click();
-            FillInField("nameInput", name, "emailInput");
-            FillInField("emailInput", email, "mobileInput");
-            FillInField("mobileInput", mobile, "nameInput");
-            AppSession.FindElementByAccessibilityId("saveBtn").Click();
+            NavigateToCreateForm();
+            FillInContact(name, email, mobile);
+            ClickSaveButton();
         }
 
         protected void FillInField(string fieldName, string data, string focusField) {
@@ -36,10 +35,24 @@ namespace ContactListUITest.ContactList {
             AppSession.FindElementByAccessibilityId(focusField).Click();
         }
 
+        protected void FillInContact(string name, string email, string mobile) {
+            FillInField("nameInput", name, "emailInput");
+            FillInField("emailInput", email, "mobileInput");
+            FillInField("mobileInput", mobile, "nameInput");
+        }
+
         protected void When_IClickOnTheListItem() {
             AppSession.FindElementByAccessibilityId("contactList")
                       .FindElementByClassName("ListViewItem")
                       .Click();
+        }
+
+        protected void NavigateToCreateForm() {
+            AppSession.FindElementByAccessibilityId("createContactBtn").Click();
+        }
+
+        protected void ClickSaveButton() {
+            AppSession.FindElementByAccessibilityId("saveBtn").Click();
         }
     }
 }

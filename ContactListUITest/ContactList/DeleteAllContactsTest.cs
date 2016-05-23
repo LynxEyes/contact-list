@@ -20,7 +20,7 @@ namespace ContactListUITest.ContactList {
 
             // Then the contact list is empty
             var list = AppSession.FindElementByAccessibilityId("contactList")
-                                    .FindElementsByClassName("ListViewItem");
+                                 .FindElementsByClassName("ListViewItem");
             Assert.Equal(0, list.Count);
         }
     }

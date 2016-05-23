@@ -55,7 +55,7 @@ namespace ContactListUITest.ContactList {
             ClickSaveButton();
             
             var newListSize = AppSession.FindElementByAccessibilityId("contactList")
-                                           .FindElementsByClassName("Image").Count;
+                                        .FindElementsByClassName("Image").Count;
 
             //check that list has one new element
             Assert.Equal(listSize + 1, newListSize);
@@ -71,29 +71,6 @@ namespace ContactListUITest.ContactList {
 
             var errorMessage = AppSession.FindElementByAccessibilityId("errorMessage");
             Assert.NotEmpty(errorMessage.Text);
-        }
-
-        private void NavigateToCreateForm() {
-            AppSession.FindElementByAccessibilityId("createContactBtn").Click();
-        }
-
-        private void ClickSaveButton() {
-            AppSession.FindElementByAccessibilityId("saveBtn").Click();
-        }
-
-        private void FillInContact(string name, string email, string mobile) {
-            FillInField("nameInput", name, "emailInput");
-            FillInField("emailInput", email, "mobileInput");
-            FillInField("mobileInput", mobile, "nameInput");
-        }
-
-        private void FillInField(string fieldName, string data, string focusField) {
-            if (data == null) return;
-
-            var field = AppSession.FindElementByAccessibilityId(fieldName);
-            field.Clear();
-            field.SendKeys(data);
-            AppSession.FindElementByAccessibilityId(focusField).Click();
         }
     }
 }
