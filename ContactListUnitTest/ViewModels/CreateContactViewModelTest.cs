@@ -1,6 +1,5 @@
 ﻿using ContactList.Models;
 using ContactList.ViewModels;
-using System;
 using Xunit;
 
 namespace ContactListUnitTest.ViewModels {
@@ -18,9 +17,8 @@ namespace ContactListUnitTest.ViewModels {
         public void SavesNewContact() {
             //given that SaveContact returns true
             var expected = true;
-            mockRepository
-                .AddHandlers()
-                    .SaveContact(Contact => expected);
+            mockRepository.AddHandlers()
+                          .SaveContact(Contact => expected);
 
             // when I save
             var actual = subject.Save();

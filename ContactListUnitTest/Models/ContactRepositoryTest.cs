@@ -1,6 +1,5 @@
 ﻿using ContactList.Models;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using Xunit;
 using static ContactList.Services.Database;
