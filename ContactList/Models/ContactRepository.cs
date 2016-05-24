@@ -16,11 +16,14 @@ namespace ContactList.Models {
             Validator = validator;
         }
 
-        public IList<Contact> GetContacts() {
-            return (from contact in DB.Table<Contact>()
-                    select contact)
-                    .OrderBy(c => c.Name, new CaseInsensitiveComparer())
-                    .ToList();
+        public IList<Contact> GetContacts(string searchText = null) {
+            var scope = (from contact in DB.Table<Contact>()
+                         select contact);
+
+            if (searchText?.Length > 0)
+                scope = scope.Where(c => c.Name == searchText);
+
+            return scope.OrderBy(c => c.Name, new CaseInsensitiveComparer()).ToList();
         }
 
         public bool SaveContact(Contact contact) {

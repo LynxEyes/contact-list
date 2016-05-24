@@ -11,7 +11,7 @@
       mc:Ignorable="d" Height="405" Width="1011"
       DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="title">Lista de Contactos</TextBlock>
         <ListView x:Name="contactList" Margin="10" ItemsSource="{Binding Contacts}" IsItemClickEnabled="True" ItemClick="contactList_ItemClick">
             <ListView.ItemTemplate>
@@ -25,6 +25,10 @@
         </ListView>
         <Button x:Name="createContactBtn" Content="Create Contact" Command="{Binding Path=GotoCreateContact}" />
         <Button x:Name="deleteAllContactsBtn" Content="Delete All Contacts" Margin="0,224,0,149" Command="{Binding Path=DeleteAllContactsCommand}" />
+
+        <TextBox x:Name="searchTextBox" TextWrapping="Wrap" Text="{Binding SearchText, Mode=TwoWay}" PlaceholderText="Search contacts..." Margin="0,276,812,97" />
+        <Button x:Name="searchBtn" Content="Search Contacts" Margin="204,276,0,97" Command="{Binding SearchContactsCommand}" />
+
     </Grid>
 
 </Page>

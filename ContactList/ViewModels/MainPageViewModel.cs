@@ -19,7 +19,9 @@ namespace ContactList.ViewModels {
         private IContactRepository Repository;
         public new event PropertyChangedEventHandler PropertyChanged;
 
-        public IList<Contact> Contacts => Repository.GetContacts();
+        public string SearchText { get; set; }
+
+        public IList<Contact> Contacts => Repository.GetContacts(SearchText);
 
         public void DeleteAllContacts() {
             Repository.DeleteAll();
@@ -27,9 +29,9 @@ namespace ContactList.ViewModels {
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {
-            if (mode == NavigationMode.Back || mode == NavigationMode.Refresh)
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"));
-
+            //if (mode == NavigationMode.Back || mode == NavigationMode.Refresh)
+            //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"));
             await Task.CompletedTask;
         }
 
@@ -47,6 +49,10 @@ namespace ContactList.ViewModels {
 
         public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
         public RelayCommand DeleteAllContactsCommand => new RelayCommand(DeleteAllContacts);
+
+        public RelayCommand SearchContactsCommand => new RelayCommand(() =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"))
+        );
     }
 }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContactList.Models {
     public interface IContactRepository {
-        IList<Contact> GetContacts();
+        IList<Contact> GetContacts(string searchText = null);
         bool SaveContact(Contact contact);
         bool DeleteContact(Contact contact);
         bool DeleteAll();

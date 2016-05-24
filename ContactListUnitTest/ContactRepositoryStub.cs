@@ -29,10 +29,10 @@ namespace ContactList.Models
 			this.InvokeMember("DeleteContact", new object[] { contact }, out result);
 			return result;
 		}
-		public IList<Contact> GetContacts()
+		public IList<Contact> GetContacts(string searchText)
 		{
 			IList<Contact> result;
-			this.InvokeMember("GetContacts", new object[] {  }, out result);
+			this.InvokeMember("GetContacts", new object[] { searchText }, out result);
 			return result;
 		}
 		public bool SaveContact(Contact contact)
@@ -97,6 +97,11 @@ namespace ContactList.Models
 				this.parent.Called("DeleteContact");
 				return this;
 			}
+			public CountCallers GetContacts(string searchText)
+			{
+				this.parent.CalledWith("GetContacts", searchText);
+				return this;
+			}
 			public CountCallers GetContacts()
 			{
 				this.parent.Called("GetContacts");
@@ -144,6 +149,11 @@ namespace ContactList.Models
 				public CountCallerMethods DeleteContact()
 				{
 					this.parent.Called(this.count, "DeleteContact");
+					return this;
+				}
+				public CountCallerMethods GetContacts(string searchText)
+				{
+					this.parent.CalledWith(this.count, "GetContacts", searchText);
 					return this;
 				}
 				public CountCallerMethods GetContacts()
@@ -244,9 +254,9 @@ namespace ContactList.Models
 				this.parent.Handle<Contact, bool>("DeleteContact", action);
 				return this;
 			}
-			public Handlers GetContacts(Func<IList<Contact>> action)
+			public Handlers GetContacts(Func<string, IList<Contact>> action)
 			{
-				this.parent.Handle<IList<Contact>>("GetContacts", action);
+				this.parent.Handle<string, IList<Contact>>("GetContacts", action);
 				return this;
 			}
 			public Handlers SaveContact(Func<Contact, bool> action)
