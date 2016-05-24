@@ -16,7 +16,7 @@ namespace ContactList.ViewModels {
             SimpleIoc.Default.Register<CreateContactViewModel>();
             SimpleIoc.Default.Register<UpdateContactViewModel>();
             SimpleIoc.Default.Register<ContactDetailsViewModel>();
-            SimpleIoc.Default.Register<ContactValidator>();
+            SimpleIoc.Default.Register<IContactValidator, ContactValidator>();
         }
 
         public MainPageViewModel Main => ServiceLocator.Current.GetInstance<MainPageViewModel>();
