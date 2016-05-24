@@ -23,6 +23,8 @@ namespace ContactList.ViewModels {
         public override void SaveContact() {
             // TODO: actually save the Contact...
             //       Navigate Back if successfull, set error message otherwise
+            Repository.UpdateContact(Contact);
+            NavigationService.GoBack();
             return; 
         }
 

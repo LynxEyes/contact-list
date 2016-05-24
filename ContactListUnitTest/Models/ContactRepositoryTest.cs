@@ -1,5 +1,6 @@
 ﻿using ContactList.Models;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Xunit;
 using static ContactList.Services.Database;
@@ -7,7 +8,9 @@ using static ContactList.Services.Database;
 namespace ContactListUnitTest.Models {
     public class ContactRepositoryTest : IDisposable {
 
-        private ContactRepository subject = new ContactRepository();
+
+        private ContactRepository subject;
+        private ContactValidatorMock validator;
 
         public void Dispose() {
             DB.Rollback();
@@ -15,6 +18,8 @@ namespace ContactListUnitTest.Models {
 
         public ContactRepositoryTest() {
             DB.BeginTransaction();
+            validator = new ContactValidatorMock();
+            subject = new ContactRepository(validator);
         }
 
         [Fact]
@@ -33,6 +38,8 @@ namespace ContactListUnitTest.Models {
             var contact = new Contact("Joao das Neves");
 
             // when I save it
+            validator.AddHandlers()
+                          .IsValid(Contact => true);
             subject.SaveContact(contact);
 
             // then it is stored on the database
@@ -44,17 +51,22 @@ namespace ContactListUnitTest.Models {
         [Fact]
         public void FailsToSaveContactWithoutName() {
             var contact = new Contact(null);
+            Assert.False(subject.SaveContact(contact));
+        }
 
-            // when I save it
-            var result = subject.SaveContact(contact);
-
-            Assert.False(result);
+        [Fact]
+        public void FailsToSaveContactWithEmptyName() {
+            var contact = new Contact("");
+            Assert.False(subject.SaveContact(contact));
         }
 
         [Fact]
         public void DeletesExistingContact() {
             //given an existing contact
             var contact = new Contact("Joao das Neves");
+            validator.AddHandlers()
+                          .IsValid(Contact => true);
+
             subject.SaveContact(contact);
 
             //when I delete it
@@ -71,7 +83,6 @@ namespace ContactListUnitTest.Models {
         public void FailsToDeleteUnexistingContact() {
             //given an existing contact
             var contact = new Contact("Joao das Neves");
-            //subject.SaveContact(contact);
 
             //when I delete it
             var deleted = subject.DeleteContact(contact);
@@ -92,6 +103,56 @@ namespace ContactListUnitTest.Models {
             // Then we're left with an empty table of contacts
             var table = DB.Table<Contact>().ToList();
             Assert.Empty(table);
+        }
+
+        [Fact]
+        public void UpdatesAnExistingContact() {
+            // given a new contact
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            // when I update it
+            validator.AddHandlers()
+                          .IsValid(Contact => true);
+            contact.Name = "No One";
+            contact.Email = "noone@nowhere.com";
+            subject.UpdateContact(contact);
+
+            // then the changes are persisted
+            var changedContact = DB.Table<Contact>().Where(x => x.Name == "No One").First();
+            Assert.Equal(contact.Id, changedContact.Id);
+            Assert.Equal(contact.Name, changedContact.Name);
+            Assert.Equal(contact.Email, changedContact.Email);
+        }
+
+        [Fact]
+        public void FailsToUpdateANonExistingContact() {
+            // Given a non existing contact
+            var contact = new Contact("Joao das Neves");
+
+            // When I try to update it
+            var result = subject.UpdateContact(contact);
+
+            // The operation fails
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void FailsToUpdateAContactWithNullName() {
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            contact.Name = null;
+            Assert.False(subject.UpdateContact(contact));
+        }
+
+        [Fact]
+        public void FailsToUpdateAContactWithEmptyName() {
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            contact.Name = "";
+            Assert.False(subject.UpdateContact(contact));
         }
     }
 }

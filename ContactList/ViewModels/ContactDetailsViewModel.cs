@@ -32,7 +32,10 @@ namespace ContactList.ViewModels {
         public new event PropertyChangedEventHandler PropertyChanged;
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {
-            Contact = parameter as Contact;
+            if (NavigationMode.Back == mode)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contact"));
+            else
+                Contact = parameter as Contact;
             await Task.CompletedTask;
         }
 

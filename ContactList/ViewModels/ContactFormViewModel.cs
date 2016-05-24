@@ -52,5 +52,14 @@ namespace ContactList.ViewModels {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ContactFormTitle"));
             }
         }
+
+        private string errorMessage;
+        public string ErrorMessage {
+            get { return errorMessage; }
+            protected set {
+                errorMessage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ErrorMessage"));
+            }
+        }
     }
 }

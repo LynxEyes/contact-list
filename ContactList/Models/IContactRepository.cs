@@ -11,5 +11,6 @@ namespace ContactList.Models {
         bool SaveContact(Contact contact);
         bool DeleteContact(Contact contact);
         bool DeleteAll();
+        bool UpdateContact(Contact contact);
     }
 }

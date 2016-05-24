@@ -8,9 +8,12 @@ using static ContactList.Services.Database;
 namespace ContactList.Models {
     public class ContactRepository : IContactRepository {
 
-        public ContactRepository() {
+        private IContactValidator Validator;
+
+        public ContactRepository(IContactValidator validator) {
             DB.DropTable<Contact>();
             DB.CreateTable<Contact>();
+            Validator = validator;
         }
 
         public IList<Contact> GetContacts() {
@@ -21,6 +24,8 @@ namespace ContactList.Models {
         }
 
         public bool SaveContact(Contact contact) {
+            if (!Validator.IsValid(contact)) return false;
+
             try {
                 DB.Insert(contact);
             } catch (SQLite.NotNullConstraintViolationException) {
@@ -37,6 +42,12 @@ namespace ContactList.Models {
         public bool DeleteAll() {
             DB.DeleteAll<Contact>();
             return true;
+        }
+
+        public bool UpdateContact(Contact contact) {
+            if (!Validator.IsValid(contact)) return false;
+
+            return 1 == DB.Update(contact);
         }
     }
 }

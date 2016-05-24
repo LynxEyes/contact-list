@@ -41,6 +41,12 @@ namespace ContactList.Models
 			this.InvokeMember("SaveContact", new object[] { contact }, out result);
 			return result;
 		}
+		public bool UpdateContact(Contact contact)
+		{
+			bool result;
+			this.InvokeMember("UpdateContact", new object[] { contact }, out result);
+			return result;
+		}
 		public CountCallers HasBeenCalled()
 		{
 			return this.countCallers;
@@ -106,6 +112,16 @@ namespace ContactList.Models
 				this.parent.Called("SaveContact");
 				return this;
 			}
+			public CountCallers UpdateContact(Contact contact)
+			{
+				this.parent.CalledWith("UpdateContact", contact);
+				return this;
+			}
+			public CountCallers UpdateContact()
+			{
+				this.parent.Called("UpdateContact");
+				return this;
+			}
 			public class CountCallerMethods
 			{
 				private readonly ContactRepositoryStub parent;
@@ -143,6 +159,16 @@ namespace ContactList.Models
 				public CountCallerMethods SaveContact()
 				{
 					this.parent.Called(this.count, "SaveContact");
+					return this;
+				}
+				public CountCallerMethods UpdateContact(Contact contact)
+				{
+					this.parent.CalledWith(this.count, "UpdateContact", contact);
+					return this;
+				}
+				public CountCallerMethods UpdateContact()
+				{
+					this.parent.Called(this.count, "UpdateContact");
 					return this;
 				}
 			}
@@ -195,6 +221,10 @@ namespace ContactList.Models
 				{
 					return this.parent.GetCall(this.position, "SaveContact");
 				}
+				public MemberInvocation UpdateContact()
+				{
+					return this.parent.GetCall(this.position, "UpdateContact");
+				}
 			}
 		}
 		public class Handlers
@@ -222,6 +252,11 @@ namespace ContactList.Models
 			public Handlers SaveContact(Func<Contact, bool> action)
 			{
 				this.parent.Handle<Contact, bool>("SaveContact", action);
+				return this;
+			}
+			public Handlers UpdateContact(Func<Contact, bool> action)
+			{
+				this.parent.Handle<Contact, bool>("UpdateContact", action);
 				return this;
 			}
 		}

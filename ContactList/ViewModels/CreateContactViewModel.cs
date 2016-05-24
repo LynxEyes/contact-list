@@ -11,22 +11,13 @@ using System.Windows.Input;
 using System.ComponentModel;
 
 namespace ContactList.ViewModels {
-    public class CreateContactViewModel : ContactFormViewModel, INotifyPropertyChanged {
+    public class CreateContactViewModel : ContactFormViewModel {
         public CreateContactViewModel(IContactRepository repository) {
             Repository = repository;
+            ContactFormTitle = "Create Contact";
         }
 
         private IContactRepository Repository { get; set; }
-
-        private string errorMessage;
-        public string ErrorMessage {
-            get { return errorMessage; }
-            set {
-                errorMessage = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ErrorMessage"));
-            }
-        }
-        public new event PropertyChangedEventHandler PropertyChanged;
 
         public bool Save() {
             return Repository.SaveContact(Contact);
