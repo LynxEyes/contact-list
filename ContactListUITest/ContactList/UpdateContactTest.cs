@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xunit;
 
 namespace ContactListUITest.ContactList {
@@ -63,6 +59,22 @@ namespace ContactListUITest.ContactList {
             Assert.Contains(name, labels);
             Assert.Contains(email, labels);
             Assert.Contains(mobile, labels);
+        }
+
+        [Fact]
+        public void UnableToUpdateContactIfNameIsEmpty() {
+            //given I have a contact
+            CreateContact("Jill");
+
+            //when I try to update it by clearing the name
+            When_IClickOnTheListItem();
+            AppSession.FindElementByAccessibilityId("updateContactBtn").Click();
+            FillInContact("");
+            AppSession.FindElementByAccessibilityId("saveContactBtn").Click();
+
+            //Then I can see an error message
+            var errorMessage = AppSession.FindElementByAccessibilityId("errorMessage");
+            Assert.NotEmpty(errorMessage.Text);
         }
     }
 }

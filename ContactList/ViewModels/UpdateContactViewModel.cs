@@ -1,13 +1,6 @@
 ﻿using ContactList.Models;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace ContactList.ViewModels {
@@ -21,11 +14,10 @@ namespace ContactList.ViewModels {
         private IContactRepository Repository { get; set; }
 
         public override void SaveContact() {
-            // TODO: actually save the Contact...
-            //       Navigate Back if successfull, set error message otherwise
-            Repository.UpdateContact(Contact);
-            NavigationService.GoBack();
-            return; 
+            if (Repository.UpdateContact(Contact))
+                NavigationService.GoBack();
+            else
+                ErrorMessage = "Error: Please fill in the Name";
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {

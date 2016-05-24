@@ -31,11 +31,13 @@ namespace ContactListUITest.ContactList {
 
             var field = AppSession.FindElementByAccessibilityId(fieldName);
             field.Clear();
-            field.SendKeys(data);
+            if (data.Length > 0) {
+                field.SendKeys(data);
+            }
             AppSession.FindElementByAccessibilityId(focusField).Click();
         }
 
-        protected void FillInContact(string name, string email, string mobile) {
+        protected void FillInContact(string name, string email = null, string mobile = null) {
             FillInField("nameInput", name, "emailInput");
             FillInField("emailInput", email, "mobileInput");
             FillInField("mobileInput", mobile, "nameInput");
