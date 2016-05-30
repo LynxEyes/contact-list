@@ -1,5 +1,6 @@
 ﻿using ContactList.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Xunit;
@@ -153,6 +154,38 @@ namespace ContactListUnitTest.Models {
 
             contact.Name = "";
             Assert.False(subject.UpdateContact(contact));
+        }
+
+        // -------------------------------------------------------------------------------
+
+        [Fact]
+        public void SearchesContactsInCaseInsensitiveManner() {
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            var list = subject.GetContacts("joao das neves");
+
+            Assert.Equal(1, list.Count);
+        }
+
+        [Fact]
+        public void SearchesContactsByMatchingWithAnyPartOfTheContactName() {
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            var list = subject.GetContacts("nev");
+
+            Assert.Equal(1, list.Count);
+        }
+
+        [Fact]
+        public void SearchingByNullReturnsAllContacts() {
+            DB.Insert(new Contact("Joao das Neves"));
+            DB.Insert(new Contact("Carlos das Montanhas"));
+
+            var list = subject.GetContacts(null);
+
+            Assert.Equal(2, list.Count);
         }
     }
 }

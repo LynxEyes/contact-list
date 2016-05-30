@@ -17,11 +17,10 @@ namespace ContactList.Models {
         }
 
         public IList<Contact> GetContacts(string searchText = null) {
+            var search = searchText ?? "";
             var scope = (from contact in DB.Table<Contact>()
+                         where contact.Name.Contains(search)
                          select contact);
-
-            if (searchText?.Length > 0)
-                scope = scope.Where(c => c.Name == searchText);
 
             return scope.OrderBy(c => c.Name, new CaseInsensitiveComparer()).ToList();
         }
@@ -31,7 +30,7 @@ namespace ContactList.Models {
 
             try {
                 DB.Insert(contact);
-            } catch (SQLite.NotNullConstraintViolationException) {
+            } catch (SQLite.Net.NotNullConstraintViolationException) {
                 return false;
             }
 
