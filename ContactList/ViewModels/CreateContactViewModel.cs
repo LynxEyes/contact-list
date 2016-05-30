@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Navigation;
 namespace ContactList.ViewModels {
 
     public class CreateContactViewModel : ContactFormViewModel {
+
         public CreateContactViewModel(IContactRepository repository) {
             Repository = repository;
             ContactFormTitle = "Create Contact";

@@ -1,21 +1,16 @@
-using System;
-using ContactList.ViewModels;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using ContactList.Models;
-using Windows.UI.Xaml.Data;
+using ContactList.ViewModels;
+using System;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace ContactList.Views {
+
     public sealed partial class MainPage : Page {
+
         public MainPage() {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-        }
-
-        private void GoToDetail_Click(object sender, RoutedEventArgs e) {
         }
 
         private void contactList_ItemClick(object sender, ItemClickEventArgs e) {
@@ -25,17 +20,19 @@ namespace ContactList.Views {
             vm.GotoContactDetails(contactSelected);
         }
 
-        private void searchBtn_Click(object sender, RoutedEventArgs e) {
-            //CollectionViewSource xpto = new CollectionViewSource(); //.GetDefaultView(contactList.ItemsSource);
-            //xpto.Source = contactList.ItemsSource;
-            //ICollectionView view = xpto.View;
-        }
-
         private bool UserFilter(object item) {
             if (string.IsNullOrEmpty(searchTextBox.Text))
                 return true;
             else
                 return ((item as Contact).Name.IndexOf(searchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void searchTextBox_KeyUp(object sender, KeyRoutedEventArgs e) {
+            if (e.Key == Windows.System.VirtualKey.Enter) {
+                var context = DataContext as MainPageViewModel;
+                context.SearchText = searchTextBox.Text;
+                context.SearchContactsCommand.Execute(sender);
+            }
         }
     }
 }

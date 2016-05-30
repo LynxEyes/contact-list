@@ -5,32 +5,30 @@
     xmlns:local="using:ContactList.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="307.368" Width="297.895">
+    mc:Ignorable="d" Height="400" Width="400">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Width="313">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="95" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="0.6*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-
-        <TextBlock x:Name="contactFormTitle" Grid.Row="0" TextWrapping="Wrap" Text="{Binding Path=ContactFormTitle}" VerticalAlignment="Top" Height="51" Grid.ColumnSpan="2" Margin="10,0,31,0"/>
-        <TextBlock x:Name="errorMessage" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=ErrorMessage}" VerticalAlignment="Top" Height="20" Width="0"/>
-        <TextBlock x:Name="nameBlock"        Grid.Column="0"     Grid.Row="2" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="20" Margin="10,6.333,10,0" />
-        <TextBox   x:Name="nameInput"        Grid.Column="1"     Grid.Row="2" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" Margin="10,0.333,31,19"/>
-        <TextBlock x:Name="emailBlock"       Grid.Column="0"     Grid.Row="3" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Height="20" Margin="10,6,10,0"/>
-        <TextBox   x:Name="emailInput"       Grid.Column="1"     Grid.Row="3" TextWrapping="Wrap" IsSpellCheckEnabled="False" Text="{Binding Email, Mode=TwoWay}" Margin="10,0,31,19" />
-        <TextBlock x:Name="mobileBlock"      Grid.Column="0"     Grid.Row="4" TextWrapping="Wrap" Text="Mobile" VerticalAlignment="Top" Height="20" Margin="10,6,10,0"/>
-        <TextBox   x:Name="mobileInput"      Grid.Column="1"     Grid.Row="4" TextWrapping="Wrap" Text="{Binding Mobile, Mode=TwoWay}" Margin="10,0,31,19.333"/>
-        <Button x:Name="saveContactBtn" Grid.Row="4" HorizontalAlignment="Stretch" Content="Save" VerticalAlignment="Top" Command="{Binding SaveContactCommand}" Height="32" Margin="10,51,31,0" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="contactFormTitle" Grid.Row="0" TextWrapping="Wrap" Text="{Binding Path=ContactFormTitle}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10" />
+        <TextBlock x:Name="errorMessage" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=ErrorMessage}" VerticalAlignment="Top" Margin="10" Foreground="#FF810000" />
+        <TextBlock x:Name="nameBlock"        Grid.Column="0"     Grid.Row="2" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="10,15.667,10,0" />
+        <TextBox   x:Name="nameInput"        Grid.Column="1"     Grid.Row="2" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" Margin="10,9.667,10,0" VerticalAlignment="Top" />
+        <TextBlock x:Name="emailBlock"       Grid.Column="0"     Grid.Row="3" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Margin="10,16,10,0" />
+        <TextBox   x:Name="emailInput"       Grid.Column="1"     Grid.Row="3" TextWrapping="Wrap" IsSpellCheckEnabled="False" Text="{Binding Email, Mode=TwoWay}" Margin="10,10,10,0"  VerticalAlignment="Top" />
+        <TextBlock x:Name="mobileBlock"      Grid.Column="0"     Grid.Row="4" TextWrapping="Wrap" Text="Mobile" VerticalAlignment="Top" Margin="10,16.333,10,0" />
+        <TextBox   x:Name="mobileInput"      Grid.Column="1"     Grid.Row="4" TextWrapping="Wrap" Text="{Binding Mobile, Mode=TwoWay}" Margin="10,10.333,10,0" VerticalAlignment="Top" />
+        <Button x:Name="saveContactBtn" Grid.Row="5" HorizontalAlignment="Stretch" Content="Save" VerticalAlignment="Top" Command="{Binding SaveContactCommand}" Height="32" Margin="10" Grid.RowSpan="2" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

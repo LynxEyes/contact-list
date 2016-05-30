@@ -1,13 +1,11 @@
 ﻿using ContactList.Utils;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using static ContactList.Services.Database;
 
 namespace ContactList.Models {
-    public class ContactRepository : IContactRepository {
 
+    public class ContactRepository : IContactRepository {
         private IContactValidator Validator;
 
         public ContactRepository(IContactValidator validator) {

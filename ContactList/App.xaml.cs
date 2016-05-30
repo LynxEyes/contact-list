@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
 using Template10.Common;
+using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
 
 namespace ContactList {
@@ -9,6 +9,7 @@ namespace ContactList {
 
     [Bindable]
     sealed partial class App : BootStrapper {
+
         public App() {
             InitializeComponent();
         }

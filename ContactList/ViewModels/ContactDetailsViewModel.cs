@@ -8,6 +8,7 @@ using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
 
 namespace ContactList.ViewModels {
+
     public class ContactDetailsViewModel : ViewModelBase, INotifyPropertyChanged {
 
         public ContactDetailsViewModel(IContactRepository repository) {
@@ -15,10 +16,12 @@ namespace ContactList.ViewModels {
         }
 
         public ICommand DeleteContactCommand => new RelayCommand(DeleteContact);
-        public ICommand UpdateContactCommand => 
+
+        public ICommand UpdateContactCommand =>
             new RelayCommand(() => NavigationService.Navigate(typeof(Views.UpdateContact), contact));
 
         private Contact contact;
+
         public Contact Contact {
             get { return contact; }
             private set {
@@ -43,6 +46,5 @@ namespace ContactList.ViewModels {
             Repository.DeleteContact(contact);
             NavigationService.GoBack();
         }
-
     }
 }

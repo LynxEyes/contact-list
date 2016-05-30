@@ -1,22 +1,22 @@
+using ContactList.Models;
+using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
-using ContactList.Models;
-using GalaSoft.MvvmLight.Command;
-using System.ComponentModel;
-using System;
 
 namespace ContactList.ViewModels {
 
     public class MainPageViewModel : ViewModelBase, INotifyPropertyChanged {
+
         public MainPageViewModel(IContactRepository repository) {
             Repository = repository;
         }
 
         private IContactRepository Repository;
+
         public new event PropertyChangedEventHandler PropertyChanged;
 
         public string SearchText { get; set; }
@@ -44,15 +44,13 @@ namespace ContactList.ViewModels {
             await Task.CompletedTask;
         }
 
-        public void GotoContactDetails(Contact contact) => 
+        public void GotoContactDetails(Contact contact) =>
             NavigationService.Navigate(typeof(Views.ContactDetails), contact);
 
         public RelayCommand GotoCreateContact => new RelayCommand(() => NavigationService.Navigate(typeof(Views.CreateContact)));
         public RelayCommand DeleteAllContactsCommand => new RelayCommand(DeleteAllContacts);
 
-        public RelayCommand SearchContactsCommand => new RelayCommand(() =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts"))
-        );
+        public RelayCommand SearchContactsCommand =>
+            new RelayCommand(() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contacts")));
     }
 }
-

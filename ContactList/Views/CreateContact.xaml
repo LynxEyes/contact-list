@@ -8,6 +8,5 @@
     mc:Ignorable="d"
     DataContext="{Binding CreateContact, Source={StaticResource Locator}}">
 
-    <local:ContactForm/>
-    
+    <local:ContactForm />
 </Page>

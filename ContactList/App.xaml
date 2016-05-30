@@ -10,10 +10,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Custom.xaml" />
                 <ResourceDictionary>
-                    <vm:Locator x:Key="Locator"/>
+                    <vm:Locator x:Key="Locator" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-
 </common:BootStrapper>

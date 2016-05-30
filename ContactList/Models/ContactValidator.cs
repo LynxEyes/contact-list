@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ContactList.Models {
 
-namespace ContactList.Models {
     public class ContactValidator : IContactValidator {
+
         public ContactValidator() {
         }
 

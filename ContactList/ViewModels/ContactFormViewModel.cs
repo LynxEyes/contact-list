@@ -1,15 +1,11 @@
 ﻿using ContactList.Models;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Template10.Mvvm;
 
 namespace ContactList.ViewModels {
+
     public abstract class ContactFormViewModel : ViewModelBase, INotifyPropertyChanged {
         public ICommand SaveContactCommand => new RelayCommand(SaveContact);
 
@@ -33,6 +29,7 @@ namespace ContactList.ViewModels {
         }
 
         private Contact contact = new Contact();
+
         public Contact Contact {
             get { return contact; }
             protected set {
@@ -45,6 +42,7 @@ namespace ContactList.ViewModels {
         }
 
         private string contactFormTitle;
+
         public string ContactFormTitle {
             get { return contactFormTitle; }
             protected set {
@@ -54,6 +52,7 @@ namespace ContactList.ViewModels {
         }
 
         private string errorMessage;
+
         public string ErrorMessage {
             get { return errorMessage; }
             protected set {

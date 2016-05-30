@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 
 namespace ContactList.ViewModels {
+
     public class UpdateContactViewModel : ContactFormViewModel {
 
         public UpdateContactViewModel(IContactRepository repository) {
