@@ -1,4 +1,6 @@
-﻿namespace ContactList.Models {
+﻿using ContactList.Services;
+
+namespace ContactList.Models {
 
     public class ContactValidator : IContactValidator {
 
@@ -10,7 +12,7 @@
         }
 
         private bool IsNameValid(Contact contact) {
-            return !(contact.Name == null) && !(contact.Name.Length == 0);
+            return !contact.Name.IsEmpty();
         }
     }
 }

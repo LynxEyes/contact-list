@@ -6,7 +6,7 @@ namespace ContactList.Models {
 
         IList<Contact> GetContacts(string searchText = null);
 
-        bool SaveContact(Contact contact);
+        CreateCodesEnum SaveContact(Contact contact);
 
         bool DeleteContact(Contact contact);
 

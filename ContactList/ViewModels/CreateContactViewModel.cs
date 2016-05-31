@@ -14,12 +14,14 @@ namespace ContactList.ViewModels {
 
         private IContactRepository Repository { get; set; }
 
-        public bool Save() {
+        public CreateCodesEnum Save() {
             return Repository.SaveContact(Contact);
         }
 
         public override void SaveContact() {
-            if (Save())
+            var result = Save();
+
+            if (result == CreateCodesEnum.OK)
                 NavigationService.GoBack();
             else
                 ErrorMessage = "Error: Please fill in the Name";

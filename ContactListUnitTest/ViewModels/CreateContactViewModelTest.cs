@@ -3,8 +3,8 @@ using ContactList.ViewModels;
 using Xunit;
 
 namespace ContactListUnitTest.ViewModels {
-    public class CreateContactViewModelTest {
 
+    public class CreateContactViewModelTest {
         private CreateContactViewModel subject;
         private ContactRepositoryMock mockRepository;
 
@@ -16,7 +16,7 @@ namespace ContactListUnitTest.ViewModels {
         [Fact]
         public void SavesNewContact() {
             //given that SaveContact returns true
-            var expected = true;
+            var expected = CreateCodesEnum.OK;
             mockRepository.AddHandlers()
                           .SaveContact(Contact => expected);
 
@@ -26,6 +26,5 @@ namespace ContactListUnitTest.ViewModels {
             // the repository (and hence the ViewModel) return true
             Assert.Equal(expected, actual);
         }
-
     }
 }

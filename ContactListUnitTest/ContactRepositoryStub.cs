@@ -35,9 +35,9 @@ namespace ContactList.Models
 			this.InvokeMember("GetContacts", new object[] { searchText }, out result);
 			return result;
 		}
-		public bool SaveContact(Contact contact)
+		public CreateCodesEnum SaveContact(Contact contact)
 		{
-			bool result;
+			CreateCodesEnum result;
 			this.InvokeMember("SaveContact", new object[] { contact }, out result);
 			return result;
 		}
@@ -259,9 +259,9 @@ namespace ContactList.Models
 				this.parent.Handle<string, IList<Contact>>("GetContacts", action);
 				return this;
 			}
-			public Handlers SaveContact(Func<Contact, bool> action)
+			public Handlers SaveContact(Func<Contact, CreateCodesEnum> action)
 			{
-				this.parent.Handle<Contact, bool>("SaveContact", action);
+				this.parent.Handle<Contact, CreateCodesEnum>("SaveContact", action);
 				return this;
 			}
 			public Handlers UpdateContact(Func<Contact, bool> action)

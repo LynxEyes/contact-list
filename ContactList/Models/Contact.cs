@@ -7,7 +7,7 @@ namespace ContactList.Models {
         [PrimaryKey, AutoIncrement]
         public int? Id { get; set; }
 
-        [NotNull]
+        [NotNull, Unique]
         public string Name { get; set; }
 
         public string Email { get; set; }

@@ -7,9 +7,8 @@ using Xunit;
 using static ContactList.Services.Database;
 
 namespace ContactListUnitTest.Models {
+
     public class ContactRepositoryTest : IDisposable {
-
-
         private ContactRepository subject;
         private ContactValidatorMock validator;
 
@@ -52,13 +51,13 @@ namespace ContactListUnitTest.Models {
         [Fact]
         public void FailsToSaveContactWithoutName() {
             var contact = new Contact(null);
-            Assert.False(subject.SaveContact(contact));
+            Assert.Equal(CreateCodesEnum.INVALID_DATA_ERROR, subject.SaveContact(contact));
         }
 
         [Fact]
         public void FailsToSaveContactWithEmptyName() {
             var contact = new Contact("");
-            Assert.False(subject.SaveContact(contact));
+            Assert.Equal(CreateCodesEnum.INVALID_DATA_ERROR, subject.SaveContact(contact));
         }
 
         [Fact]

@@ -4,6 +4,7 @@ using System;
 using Xunit;
 
 namespace ContactListUITest.ContactList {
+
     public class CreateContactTest : BaseUITest {
 
         [Fact]
@@ -15,7 +16,7 @@ namespace ContactListUITest.ContactList {
         [Fact]
         public void CreateContactButtonNavigatesToCreateContactPage() {
             NavigateToCreateForm();
-            
+
             var createContactTitle = AppSession.FindElementByAccessibilityId("contactFormTitle");
             Assert.NotNull(createContactTitle);
         }
@@ -31,6 +32,24 @@ namespace ContactListUITest.ContactList {
             Assert.NotNull(nameInput);
             Assert.NotNull(mobileInput);
             Assert.NotNull(emailInput);
+        }
+
+        [Fact]
+        public void FailsToCreateDuplicateContact() {
+            NavigateToCreateForm();
+
+            //given I have a contact named Jack
+            FillInContact("Jack", "jack@acme.com", "1234567890");
+            ClickSaveButton();
+
+            //when I try to create another contact with the same name
+            NavigateToCreateForm();
+            FillInContact("Jack", "jack@acme.com", "1234567890");
+            ClickSaveButton();
+
+            //I get an error msg
+            var errorMessage = AppSession.FindElementByAccessibilityId("errorMessage");
+            Assert.NotEmpty(errorMessage.Text);
         }
 
         [Fact]
@@ -53,7 +72,7 @@ namespace ContactListUITest.ContactList {
             NavigateToCreateForm();
             FillInField("nameInput", "Jack", "emailInput");
             ClickSaveButton();
-            
+
             var newListSize = AppSession.FindElementByAccessibilityId("contactList")
                                         .FindElementsByClassName("Image").Count;
 

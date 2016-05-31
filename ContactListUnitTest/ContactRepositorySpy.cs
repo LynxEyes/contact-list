@@ -33,9 +33,9 @@ namespace ContactList.Models
 			this.InvokeMember("GetContacts", new object[] { searchText }, out result);
 			return result;
 		}
-		public bool SaveContact(Contact contact)
+		public CreateCodesEnum SaveContact(Contact contact)
 		{
-			bool result;
+			CreateCodesEnum result;
 			this.InvokeMember("SaveContact", new object[] { contact }, out result);
 			return result;
 		}

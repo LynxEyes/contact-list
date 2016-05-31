@@ -4,6 +4,7 @@ using System;
 using Xunit;
 
 namespace ContactListUITest.ContactList {
+
     public class BaseUITest : IDisposable {
         protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
         protected static IOSDriver<IOSElement> AppSession; // Temporary placeholder until Windows namespace exists
@@ -13,6 +14,7 @@ namespace ContactListUITest.ContactList {
             appCapabilities.SetCapability("app", "cf59c34d-6a44-4b82-9029-ad2fc3cc2611_xnnwpqakf2yqj!App");
             AppSession = new IOSDriver<IOSElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
             Assert.NotNull(AppSession);
+            AppSession.FindElementByAccessibilityId("deleteAllContactsBtn").Click();
         }
 
         public void Dispose() {
