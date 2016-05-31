@@ -155,6 +155,23 @@ namespace ContactListUnitTest.Models {
             Assert.False(subject.UpdateContact(contact));
         }
 
+        [Fact]
+        public void FailsToCreateDuplicateContact() {
+            //given I have a contact
+            var contact = new Contact("Joao das Neves");
+            DB.Insert(contact);
+
+            // when I create a duplicate
+            validator.AddHandlers()
+                          .IsValid(Contact => true);
+
+            var newContact = new Contact("Joao das Neves");
+            var result = subject.SaveContact(newContact);
+
+            // then I get an error
+            Assert.Equal(CreateCodesEnum.DUPLICATE_NAME_ERROR, result);
+        }
+
         // -------------------------------------------------------------------------------
 
         [Fact]

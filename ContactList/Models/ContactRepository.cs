@@ -32,7 +32,7 @@ namespace ContactList.Models {
             } catch (SQLite.Net.NotNullConstraintViolationException) {
                 return CreateCodesEnum.NULL_NAME_ERROR;
             } catch (SQLite.Net.SQLiteException) {
-                return CreateCodesEnum.INVALID_DATA_ERROR;
+                return CreateCodesEnum.DUPLICATE_NAME_ERROR;
             }
 
             return CreateCodesEnum.OK;
