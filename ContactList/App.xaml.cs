@@ -11,6 +11,7 @@ namespace ContactList {
     sealed partial class App : BootStrapper {
 
         public App() {
+            //Services.Database.platform = new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT();
             InitializeComponent();
         }
 
