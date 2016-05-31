@@ -23,15 +23,15 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="showContactTitle" TextWrapping="Wrap" Text="Contact Details" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" />
-        <TextBlock x:Name="NameLabel" TextWrapping="Wrap" Text="Name: " Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
-        <TextBlock x:Name="Name" TextWrapping="Wrap" Text="{Binding Contact.Name}" Grid.Column="1" Grid.Row="1" Margin="10" VerticalAlignment="Top" />
-        <TextBlock x:Name="EmailLabel" TextWrapping="Wrap" Text="Email:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
-        <TextBlock x:Name="Email" TextWrapping="Wrap" Text="{Binding Contact.Email}" Grid.Column="1" Grid.Row="2" Margin="10" VerticalAlignment="Top" />
-        <TextBlock x:Name="MobileLabel" TextWrapping="Wrap" Text="Mobile:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
-        <TextBlock x:Name="Mobile" TextWrapping="Wrap" Text="{Binding Contact.Mobile}" Grid.Column="1" Grid.Row="3" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="showContactTitle" x:Uid="ContactDetailsTitle" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="NameLabel"        x:Uid="ContactDetailsName" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="Name"             TextWrapping="Wrap" Text="{Binding Contact.Name}" Grid.Column="1" Grid.Row="1" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="EmailLabel"       x:Uid="ContactDetailsEmail" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="Email"            TextWrapping="Wrap" Text="{Binding Contact.Email}" Grid.Column="1" Grid.Row="2" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="MobileLabel"      x:Uid="ContactDetailsMobile" TextWrapping="Wrap" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" />
+        <TextBlock x:Name="Mobile"           TextWrapping="Wrap" Text="{Binding Contact.Mobile}" Grid.Column="1" Grid.Row="3" Margin="10" VerticalAlignment="Top" />
 
-        <Button x:Name="deleteContactBtn" Content="Delete" Command="{Binding DeleteContactCommand}" Grid.Column="0" Grid.Row="4" Margin="10" />
-        <Button x:Name="updateContactBtn" Content="Update" Command="{Binding UpdateContactCommand}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="10" />
+        <Button x:Name="deleteContactBtn"    x:Uid="ContactDetailsDeleteBtn" Command="{Binding DeleteContactCommand}" Grid.Column="0" Grid.Row="4" Margin="10" />
+        <Button x:Name="updateContactBtn"    x:Uid="ContactDetailsUpdateBtn" Command="{Binding UpdateContactCommand}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" Margin="10" />
     </Grid>
 </Page>

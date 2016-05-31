@@ -10,7 +10,9 @@ namespace ContactList.Services {
         public static SQLiteConnection DB { get; } = new SQLiteConnection(new SQLitePlatformWinRT(), Path.Combine(ApplicationData.Current.LocalFolder.Path, "contacts.db"));
 
         static Database() {
+#if DEBUG
             DB.TraceListener = new DebugTraceListener();
+#endif
         }
 
         private class DebugTraceListener : ITraceListener {

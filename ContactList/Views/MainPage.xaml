@@ -22,10 +22,10 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" x:Name="title" Margin="10" Text="Lista de Contactos" />
+        <TextBlock Grid.Row="0" x:Name="title" x:Uid="MainPageTitle" Margin="10" />
 
-        <TextBox Grid.Row="1" x:Name="searchTextBox" TextWrapping="Wrap" Text="{Binding SearchText, Mode=TwoWay}" PlaceholderText="Search contacts..." Margin="10,10,131,10" VerticalAlignment="Top" KeyUp="searchTextBox_KeyUp" />
-        <Button Grid.Row="1" x:Name="searchBtn" Content="Search" Command="{Binding SearchContactsCommand}" HorizontalAlignment="Stretch" Margin="274,10,10,10" VerticalAlignment="Top" />
+        <TextBox Grid.Row="1" x:Name="searchTextBox" x:Uid="MainPageSearchTxtBox" TextWrapping="Wrap" Text="{Binding SearchText, Mode=TwoWay}"  Margin="10,10,131,10" VerticalAlignment="Top" KeyUp="searchTextBox_KeyUp" />
+        <Button Grid.Row="1" x:Name="searchBtn" x:Uid="MainPageSearchBtn" Command="{Binding SearchContactsCommand}" HorizontalAlignment="Stretch" Margin="274,10,10,10" VerticalAlignment="Top" />
 
         <ListView Grid.Row="2" x:Name="contactList" Margin="10,0" ItemsSource="{Binding Contacts}" IsItemClickEnabled="True" ItemClick="contactList_ItemClick" BorderThickness="2" BorderBrush="#FF7A7A7A">
             <ListView.ItemTemplate>
@@ -38,7 +38,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Grid.Row="3" x:Name="createContactBtn" Content="Create Contact" Command="{Binding Path=GotoCreateContact}" HorizontalAlignment="Left" Margin="10" />
-        <Button Grid.Row="3" x:Name="deleteAllContactsBtn" Content="Delete All Contacts" Command="{Binding Path=DeleteAllContactsCommand}" HorizontalAlignment="Right" Margin="10" />
+        <Button Grid.Row="3" x:Name="createContactBtn" x:Uid="MainPageCreateBtn" Command="{Binding Path=GotoCreateContact}" HorizontalAlignment="Left" Margin="10" />
+        <Button Grid.Row="3" x:Name="deleteAllContactsBtn" x:Uid="MainPageDeleteAllBtn" Command="{Binding Path=DeleteAllContactsCommand}" HorizontalAlignment="Right" Margin="10" />
     </Grid>
 </Page>

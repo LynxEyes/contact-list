@@ -21,10 +21,28 @@ namespace ContactList.ViewModels {
         public override void SaveContact() {
             var result = Save();
 
-            if (result == CreateCodesEnum.OK)
-                NavigationService.GoBack();
-            else
-                ErrorMessage = "Error: Please fill in the Name";
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            switch (result) {
+                case CreateCodesEnum.OK:
+                    NavigationService.GoBack();
+                    break;
+
+                case CreateCodesEnum.INVALID_DATA_ERROR:
+                    ErrorMessage = loader.GetString("ContactFormInvalidData");
+                    break;
+
+                case CreateCodesEnum.NULL_NAME_ERROR:
+                    ErrorMessage = loader.GetString("ContactFormNullName");
+                    break;
+
+                case CreateCodesEnum.DUPLICATE_NAME_ERROR:
+                    ErrorMessage = loader.GetString("ContactFormDuplicateName");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState) {
