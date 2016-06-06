@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Database.cs" />
     <Compile Include="Services\GithubContributors.cs" />
-    <Compile Include="Services\StringExtensions.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\CaseInsensitiveComparer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Models\ContactRepositoryTest.cs" />
+    <Compile Include="Models\ContactValidatorTest.cs" />
     <Compile Include="Services\GithubContributorsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

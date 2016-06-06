@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Services {
+namespace Common.Utils {
 
     public static class StringExtensions {
 
